@@ -343,7 +343,9 @@ ATF_TC_BODY_FD_LEAKCHECK(epoll__event_size, tc)
 	struct epoll_event event;
 	// this check works on 32bit _and_ 64bit, since
 	// sizeof(epoll_event) == sizeof(uint32_t) + sizeof(uint64_t)
+#ifdef __x86_64__
 	ATF_REQUIRE(sizeof(event) == 12);
+#endif
 }
 
 ATF_TC_WITHOUT_HEAD(epoll__recursive_register);
